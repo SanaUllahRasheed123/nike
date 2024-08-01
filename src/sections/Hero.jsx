@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { arrowRight } from "../assets/icons";
 import Button from "../components/Button";
-import { shoes,statistics } from "../constants";
+import { shoes, statistics } from "../constants";
 import { bigShoe1 } from "../assets/images";
 import ShoeCard from "../components/ShoeCard";
+import { CountUp } from "react-countup";
+// import { CountUp } from "react-countup/build/CountUp";
 
 const Hero = () => {
-  const [bigShoeImg, setbigShoeImg] = useState(bigShoe1)
+  const [bigShoeImg, setbigShoeImg] = useState(bigShoe1);
   return (
     <section
       id="home"
@@ -39,7 +41,13 @@ const Hero = () => {
         <div className="flex justify-start items-start flex-wrap w-full mt-20 gap-16">
           {statistics.map((stat) => (
             <div key={stat.label}>
-              <p className="text-4xl font-palanquin font-bold">{stat.value}</p>
+              <CountUp
+                start={0}
+                end={stat.value}
+                duration={2}
+                // separator=","
+                className="text-4xl font-palanquin font-bold"
+              />
               <p className="leading-7 font-montserrat text-slate-gray">
                 {stat.label}
               </p>
@@ -56,15 +64,13 @@ const Hero = () => {
           className="object-contain relative z-10"
         />
         <div className="flex sm:gap-6 gap-4 absolute -bottom-[5%] sm:left-[10%] max-sm:px-36 ">
-          {shoes.map((shoe)=>(
+          {shoes.map((shoe) => (
             <div key={shoe}>
-            <ShoeCard
-              imgURL ={shoe}
-              changeBigShoeImage=
-              {(shoe)=>setbigShoeImg(shoe)}
-              bigShoeImg={bigShoeImg}
-             
-            />
+              <ShoeCard
+                imgURL={shoe}
+                changeBigShoeImage={(shoe) => setbigShoeImg(shoe)}
+                bigShoeImg={bigShoeImg}
+              />
             </div>
           ))}
         </div>
